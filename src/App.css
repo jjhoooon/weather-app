@@ -79,6 +79,8 @@ body {
   border-radius: 10px;
   box-shadow: -5px 5px 5px rgb(144, 143, 143);
   padding: 30px 70px 30px 20px;
+  caret-color: transparent;
+  cursor: default;
 }
 
 @keyframes move {
@@ -127,6 +129,36 @@ body {
 
 .spinner-box {
   margin: 70px 0 0 80px;
+}
+
+.button-container {
+  display: flex;
+  height: 20vh;
+  justify-content: space-around;
+  align-items: center;
+  caret-color: transparent;
+}
+
+button {
+  background: linear-gradient(#e66465, #9198e5); /* Green */
+  border-radius: 20px;
+  box-shadow: 0 5px 5px gray;
+  color: rgb(255, 255, 255);
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 30px;
+  border-color: 100px solid pink;
+}
+
+button:hover {
+  font-size: 40px;
+}
+
+button:focus {
+  transform: translateY(4px);
+  background: linear-gradient(#f0fc89, #9198e5);
 }
 
 .current-button {
