@@ -46,7 +46,7 @@ body {
 .right-container {
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: space-evenly;
   align-items: center;
   width: 30%;
   border: 1px solid black;

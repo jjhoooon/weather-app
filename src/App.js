@@ -30,12 +30,14 @@ function App() {
   const [loading, setLoading] = useState(false)
 
   const getCurrentLocation = () => {
+    setLoading(true)
     navigator.geolocation.getCurrentPosition((position) => {
       let lat = position.coords.latitude
       let lon = position.coords.longitude
       let weatherInfo = getWeatherByLocation(lat, lon)
       console.log(weatherInfo)
     })
+    setLoading(false)
   }
 
   const getWeatherByLocation = async (latitude, longitude) => {
@@ -78,7 +80,7 @@ function App() {
         </div>
         <div className='right-container'>
           <WeatherBox className='weather-info' weather={weather} loading={loading} />
-          <div className='current-button'>current-button</div>
+          <button className='current-button' onClick={() => getCurrentLocation()}>current-button</button>
         </div>
       </div>
     </div >
