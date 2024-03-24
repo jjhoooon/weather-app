@@ -1,2 +1,2 @@
 - 첫번째 프로젝트: open weather API를 이용한 위치 기반 날씨 알림 앱.
-- netlify_domain : https://0323--tranquil-banoffee-37912b.netlify.app/
+- netlify_domain : https://main--chimerical-boba-4e7b38.netlify.app/
