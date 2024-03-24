@@ -125,5 +125,9 @@ body {
   color: rgb(209, 205, 205);
 }
 
+.spinner-box {
+  margin: 70px 0 0 80px;
+}
+
 .current-button {
 }
