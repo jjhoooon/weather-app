@@ -1,6 +1,5 @@
 import React from 'react'
 import ClipLoader from "react-spinners/ClipLoader";
-import CloudIcon from '../img/CloudIcon.png'
 
 const WeatherBox = ({ weather, loading }) => {
 
@@ -20,7 +19,15 @@ const WeatherBox = ({ weather, loading }) => {
             ) : (
                 <div className='weather-box'>
                     <div className='weather-title'>{weather?.name}</div>
-                    <div className='weather-image'></div>
+                    <div className='weather-image-container'>
+                        {(weather?.weather[0].main == 'Clouds') && <div className='weather-image-clouds' />}
+                        {(weather?.weather[0].main == 'Rain') && <div className='weather-image-rain' />}
+                        {(weather?.weather[0].main == 'Snow') && <div className='weather-image-snow' />}
+                        {(weather?.weather[0].main == 'Clear') && <div className='weather-image-sunny' />}
+                        {(weather?.weather[0].main == 'Wind') && <div className='weather-image-wind' />}
+                        {/* {if(weather?.main)} */}
+                        {/* <div className='weather-image' /> */}
+                    </div>
                     {/* <div >temp : {weather?.main.temp}</div> */}
                     <div className='weather-temp-box'>
                         <span className='temp-max'>{weather?.main.temp_max}° - </span>
