@@ -55,12 +55,11 @@ function App() {
   }
 
   useEffect(() => {
-    getCurrentLocation()
-  }, [])
-
-  useEffect(() => {
-    console.log(city)
-    getWeatherByCity()
+    if (city == '') {
+      getCurrentLocation()
+    } else {
+      getWeatherByCity()
+    }
   }, [city])
 
   return (
