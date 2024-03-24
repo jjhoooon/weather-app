@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import './App.css';
 import { useState } from 'react';
 import WeatherBox from './component/WeatherBox';
+import WeatherButton from './component/WeatherButton'
 // import City from './component/City';
 
 
@@ -19,38 +20,14 @@ import WeatherBox from './component/WeatherBox';
 //3. getWeatherByCityLocation -> fetch(), data -> setState,
 //4. state -> <City>, props전달
 
-//weather-info가 업데이트된다.
-// lat, long
-//한국 : 37.5685, 127.0743
-//뉴욕 : 42.3909, -73.4526
-//도쿄 : 35.6528, 139.8394, 
-//런던 : 51.509865, -0.118092
-
-const choice = {
-  newyork: {
-    name: 'NewYork',
-    latitude: 42.3909,
-    longitude: -73.4526,
-  },
-  tokyo: {
-    name: 'Tokyo',
-    latitude: 35.6528,
-    longitude: 139.8394,
-  },
-  london: {
-    name: 'London',
-    latitude: 51.5098,
-    longitude: -0.1180,
-  }
-}
 
 const API_KEY = '5e453c2354843c612b6b8ff77f3d73c4'
 
 function App() {
 
+  const cities = ['london', 'new york', 'tokyo', 'seoul']
   const [weather, setWeather] = useState(null)
-  // const [loading, setLoading] = useState(false)
-  // const [citySelect, setCitySelect] = useState(null)
+  const [city, setCity] = useState("")
 
   const getCurrentLocation = () => {
     navigator.geolocation.getCurrentPosition((position) => {
@@ -63,45 +40,38 @@ function App() {
 
   const getWeatherByLocation = async (latitude, longitude) => {
     let url = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${API_KEY}&lang=kr&units=metric`
-    // setLoading(true)
     let response = await fetch(url)
     let data = await response.json()
     setWeather(data)
-    // setLoading(false)
     console.log("data : ", data)
   }
 
-  // const cityButtonHandler = (city) => {
-  //   // console.log(choice[city])
-  //   let chosen_city = choice[city]
-  //   setCitySelect(chosen_city)
-  //   console.log("choice[city] : ", choice[city], "/ citySelect : ", citySelect)
-  // }
-
-  // const getCityLocation = (City) => {
-  //   console.log(setCitySelect(choice[City]))
-  //   let lan = citySelect.latitude
-  //   let lon = citySelect.longitude
-  //   let weatherInfo = getWeatherByLocation(lan, lon)
-  //   console.log(citySelect.name, weatherInfo)
-  // }
-
+  const getWeatherByCity = async () => {
+    let url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&lang=kr&units=metric`
+    let response = await fetch(url)
+    let data = await response.json()
+    console.log("data : ", data)
+  }
 
   useEffect(() => {
     getCurrentLocation()
-    // getCityLocation()
   }, [])
+
+  useEffect(() => {
+    console.log(city)
+    getWeatherByCity()
+  }, [city])
 
   return (
     <div className='root'>
       <div className='main'>
         <div className='left-container'>
           <div className='world-map'>
-            {/* <button onClick={() => (cityButtonHandler('newyork'))}>newyork</button>
-            <button onClick={() => (cityButtonHandler('tokyo'))}>tokyo</button>
-            <button onClick={() => (cityButtonHandler('london'))}>london</button> */}
+
           </div>
-          <div className='world-info'>world-info</div>
+          <div className='world-info'>
+            <WeatherButton cities={cities} setCity={setCity} />
+          </div>
         </div>
         <div className='right-container'>
           <WeatherBox className='weather-info' weather={weather} />
